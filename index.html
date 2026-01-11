@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Archivum - Secure Evidence Capture</title>
+
+<!-- FAVICON (ABOVE URL BAR) -->
+<link rel="icon" type="image/png" href="archivum.jpeg">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:#f2f3f5;
+  color:#111;
+}
+
+/* ===== LAYOUT ===== */
+section{min-height:100vh;padding:72px 24px}
+.container{max-width:1200px;margin:auto}
+
+/* ===== COMMON ===== */
+.logo img{height:42px;display:block}
+.primary-btn{
+  background:#111;color:#fff;border:none;
+  padding:16px 36px;border-radius:999px;
+  font-weight:600;cursor:pointer;
+}
+.secondary-btn{
+  background:#fff;border:2px solid #111;
+  padding:14px 30px;border-radius:999px;
+  font-weight:600;cursor:pointer;
+}
+.nav{display:flex;justify-content:space-between;margin-top:56px}
+
+/* ===== HERO ===== */
+.header{
+  display:flex;justify-content:space-between;
+  align-items:center;margin-bottom:80px;
+}
+.hero{
+  display:grid;grid-template-columns:1.2fr .8fr;
+  gap:64px;
+}
+.hero h1{font-size:56px;font-weight:800}
+.hero p{font-size:18px;color:#555;margin:24px 0 40px}
+.hero ul{margin-bottom:40px;color:#444}
+.hero li{margin-bottom:10px}
+
+.hero-box{
+  height:360px;border-radius:32px;
+  background:linear-gradient(145deg,#fff,#e5e7eb);
+  display:flex;align-items:center;justify-content:center;
+  font-size:110px;
+}
+
+/* ===== SPINNING SHIELD ===== */
+.spin-shield{
+  animation:spin 6s linear infinite;
+}
+@keyframes spin{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
+}
+
+/* ===== SECTION HEAD ===== */
+.section-head{margin-bottom:48px}
+.section-head h2{font-size:40px}
+.section-head p{color:#555;margin-top:10px;max-width:700px}
+
+/* ===== INFO TEXT ===== */
+.helper-text{
+  color:#666;
+  font-size:15px;
+  margin-bottom:24px;
+  max-width:700px;
+}
+
+/* ===== CARDS ===== */
+.card{
+  background:#fff;border-radius:20px;
+  padding:28px;display:flex;gap:18px;
+  box-shadow:0 8px 24px rgba(0,0,0,.08);
+  cursor:pointer;margin-bottom:24px;
+  transition:.2s;
+}
+.card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 14px 30px rgba(0,0,0,.15);
+}
+.icon{font-size:28px}
+.card p{color:#555;margin-top:6px;font-size:14px}
+
+/* ===== UPLOAD LIST ===== */
+.uploaded-items{margin-top:32px;display:flex;flex-direction:column;gap:16px}
+.uploaded-item{
+  background:#f9fafb;border-radius:14px;
+  padding:16px 20px;
+  display:flex;justify-content:space-between;align-items:center;
+  border:1px solid #e5e7eb;font-size:14px;
+}
+.delete-btn{
+  background:#ef4444;color:#fff;border:none;
+  padding:6px 14px;border-radius:999px;
+  cursor:pointer;font-size:12px;
+}
+
+/* ===== API KEY INPUT ===== */
+.api-key-section{
+  background:#fff;
+  border-radius:20px;
+  padding:24px;
+  margin-bottom:24px;
+  box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+
+.api-key-section input{
+  width:100%;
+  padding:12px;
+  border:2px solid #e5e7eb;
+  border-radius:12px;
+  font-size:14px;
+  margin-top:8px;
+}
+
+.api-key-section small{
+  color:#666;
+  display:block;
+  margin-top:8px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr}
+  .hero h1{font-size:44px}
+}
+</style>
+</head>
+
+<body>
+
+<!-- LANDING -->
+<section id="landing">
+<div class="container">
+  <div class="header">
+    <div class="logo">
+      <img src="archivum.jpeg" alt="Archivum Logo">
+    </div>
+    <div>🔒 Your data never leaves this device</div>
+  </div>
+
+  <div class="hero">
+    <div>
+      <h1>Capture harassment safely.</h1>
+      <p>
+        This tool helps you collect and organize evidence of harassment,
+        abuse, or misconduct in a structured, secure way.
+      </p>
+      <ul>
+        <li>✔ Screenshots & media</li>
+        <li>✔ Links to posts or profiles</li>
+        <li>✔ Copied messages or chats</li>
+        <li>✔ Chronological incident timeline</li>
+      </ul>
+      <button class="primary-btn" onclick="scrollToSection('evidence')">
+        Start Capturing
+      </button>
+    </div>
+
+    <!-- SPINNING SHIELD -->
+    <div class="hero-box">
+      <div class="spin-shield">🛡️</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- EVIDENCE CAPTURE SECTION -->
+<section id="evidence">
+<div class="container">
+  <div class="section-head">
+    <h2>Collect Evidence</h2>
+    <p>Upload files, add links, messages, and build a timeline. We'll help you organize everything.</p>
+  </div>
+
+  <p class="helper-text">
+    All evidence is stored locally. Nothing is uploaded until you generate the final report.
+  </p>
+
+
+
+  <!-- UPLOAD FILES CARD -->
+  <div class="card" onclick="document.getElementById('fileInput').click()">
+    <div class="icon">📷</div>
+    <div>
+      <h3>Upload Screenshots or Media</h3>
+      <p>Click to select images, videos, or documents from your device</p>
+    </div>
+  </div>
+  <input type="file" id="fileInput" accept="image/*" multiple style="display:none" onchange="handleFileUpload(event)">
+  <div id="fileList" class="uploaded-items"></div>
+
+  <!-- ADD LINKS CARD -->
+  <div class="card" onclick="showLinkInput()">
+    <div class="icon">🔗</div>
+    <div>
+      <h3>Add Links</h3>
+      <p>Paste URLs to social media posts, profiles, or websites</p>
+    </div>
+  </div>
+  <div id="linkInputArea" style="display:none;margin-bottom:24px;">
+    <input type="text" id="linkInput" placeholder="Paste link here..." style="width:100%;padding:12px;border:2px solid #e5e7eb;border-radius:12px;font-size:14px;">
+    <button class="secondary-btn" onclick="addLink()" style="margin-top:12px;">Add Link</button>
+  </div>
+  <div id="linkList" class="uploaded-items"></div>
+
+  <!-- ADD MESSAGES CARD -->
+  <div class="card" onclick="showMessageInput()">
+    <div class="icon">💬</div>
+    <div>
+      <h3>Add Messages</h3>
+      <p>Copy and paste text messages, DMs, or chat logs</p>
+    </div>
+  </div>
+  <div id="messageInputArea" style="display:none;margin-bottom:24px;">
+    <textarea id="messageInput" placeholder="Paste messages here..." style="width:100%;padding:12px;border:2px solid #e5e7eb;border-radius:12px;font-size:14px;min-height:120px;resize:vertical;"></textarea>
+    <button class="secondary-btn" onclick="addMessage()" style="margin-top:12px;">Add Message</button>
+  </div>
+  <div id="messageList" class="uploaded-items"></div>
+
+  <!-- ADD TIMELINE CARD -->
+  <div class="card" onclick="showTimelineInput()">
+    <div class="icon">📅</div>
+    <div>
+      <h3>Build Timeline</h3>
+      <p>Add dated entries describing what happened and when</p>
+    </div>
+  </div>
+  <div id="timelineInputArea" style="display:none;margin-bottom:24px;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+      <input type="date" id="timelineDate" style="padding:12px;border:2px solid #e5e7eb;border-radius:12px;font-size:14px;">
+      <input type="time" id="timelineTime" style="padding:12px;border:2px solid #e5e7eb;border-radius:12px;font-size:14px;">
+    </div>
+    <textarea id="timelineText" placeholder="Describe what happened..." style="width:100%;padding:12px;border:2px solid #e5e7eb;border-radius:12px;font-size:14px;min-height:100px;resize:vertical;"></textarea>
+    <button class="secondary-btn" onclick="addTimeline()" style="margin-top:12px;">Add to Timeline</button>
+  </div>
+  <div id="timelineList" class="uploaded-items"></div>
+
+  <!-- GENERATE BUTTON -->
+  <div style="margin-top:56px;text-align:center;">
+    <button class="primary-btn" id="generateBtn" onclick="generatePDF()" style="font-size:18px;padding:20px 48px;">
+      Generate Documentation
+    </button>
+    <p id="loadingMsg" style="margin-top:16px;color:#666;display:none;">
+      ⏳ Analyzing evidence and generating report...
+    </p>
+  </div>
+</div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+// ===== DATA STORAGE =====
+let files = [];
+let links = [];
+let messages = [];
+let timeline = [];
+
+// ===== UTILITY FUNCTIONS =====
+function scrollToSection(id){
+  document.getElementById(id).scrollIntoView({behavior:"smooth"});
+}
+
+function showLinkInput() {
+  document.getElementById('linkInputArea').style.display = 'block';
+  document.getElementById('linkInput').focus();
+}
+
+function showMessageInput() {
+  document.getElementById('messageInputArea').style.display = 'block';
+  document.getElementById('messageInput').focus();
+}
+
+function showTimelineInput() {
+  document.getElementById('timelineInputArea').style.display = 'block';
+  document.getElementById('timelineDate').focus();
+}
+
+// ===== FILE HANDLING =====
+function handleFileUpload(event) {
+  const newFiles = Array.from(event.target.files);
+  
+  newFiles.forEach(file => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      files.push({
+        name: file.name,
+        data: e.target.result
+      });
+      renderFiles();
+    };
+    reader.readAsDataURL(file);
+  });
+  
+  event.target.value = '';
+}
+
+function renderFiles() {
+  const fileList = document.getElementById('fileList');
+  fileList.innerHTML = files.map((file, idx) => `
+    <div class="uploaded-item">
+      <span>📷 ${file.name}</span>
+      <button class="delete-btn" onclick="deleteFile(${idx})">Delete</button>
+    </div>
+  `).join('');
+}
+
+function deleteFile(idx) {
+  files.splice(idx, 1);
+  renderFiles();
+}
+
+// ===== LINK HANDLING =====
+function addLink() {
+  const input = document.getElementById('linkInput');
+  const link = input.value.trim();
+  
+  if (link) {
+    links.push(link);
+    input.value = '';
+    renderLinks();
+  }
+}
+
+function renderLinks() {
+  const linkList = document.getElementById('linkList');
+  linkList.innerHTML = links.map((link, idx) => `
+    <div class="uploaded-item">
+      <span>🔗 ${link}</span>
+      <button class="delete-btn" onclick="deleteLink(${idx})">Delete</button>
+    </div>
+  `).join('');
+}
+
+function deleteLink(idx) {
+  links.splice(idx, 1);
+  renderLinks();
+}
+
+// ===== MESSAGE HANDLING =====
+function addMessage() {
+  const input = document.getElementById('messageInput');
+  const message = input.value.trim();
+  
+  if (message) {
+    messages.push(message);
+    input.value = '';
+    renderMessages();
+  }
+}
+
+function renderMessages() {
+  const messageList = document.getElementById('messageList');
+  messageList.innerHTML = messages.map((msg, idx) => `
+    <div class="uploaded-item">
+      <span>💬 ${msg.substring(0, 50)}${msg.length > 50 ? '...' : ''}</span>
+      <button class="delete-btn" onclick="deleteMessage(${idx})">Delete</button>
+    </div>
+  `).join('');
+}
+
+function deleteMessage(idx) {
+  messages.splice(idx, 1);
+  renderMessages();
+}
+
+// ===== TIMELINE HANDLING =====
+function addTimeline() {
+  const date = document.getElementById('timelineDate').value;
+  const time = document.getElementById('timelineTime').value;
+  const text = document.getElementById('timelineText').value.trim();
+  
+  if (date && time && text) {
+    timeline.push({ date, time, text });
+    document.getElementById('timelineDate').value = '';
+    document.getElementById('timelineTime').value = '';
+    document.getElementById('timelineText').value = '';
+    renderTimeline();
+  }
+}
+
+function renderTimeline() {
+  const timelineList = document.getElementById('timelineList');
+  timelineList.innerHTML = timeline.map((entry, idx) => `
+    <div class="uploaded-item">
+      <span>📅 ${entry.date} ${entry.time} - ${entry.text.substring(0, 40)}${entry.text.length > 40 ? '...' : ''}</span>
+      <button class="delete-btn" onclick="deleteTimeline(${idx})">Delete</button>
+    </div>
+  `).join('');
+}
+
+function deleteTimeline(idx) {
+  timeline.splice(idx, 1);
+  renderTimeline();
+}
+
+// ===== PDF GENERATION WITH GEMINI API =====
+async function generatePDF() {
+  const apiKey = "AIzaSyAl8WjZ0OOtyPSdLRAiSJhp4TSP8nyQluE";
+  const btn = document.getElementById('generateBtn');
+  const loading = document.getElementById('loadingMsg');
+  
+  // Check if user has added any evidence
+  if (files.length === 0 && links.length === 0 && messages.length === 0 && timeline.length === 0) {
+    alert('Please add at least some evidence before generating the report.');
+    return;
+  }
+  
+  btn.disabled = true;
+  loading.style.display = 'block';
+  
+  try {
+    // Build timeline text
+    const timelineText = timeline.map(t => 
+      `${t.date} ${t.time} — ${t.text}`
+    ).join('\n');
+    
+    // Build prompt
+    const promptText = `
+This document is prepared by an individual to document an incident they personally experienced.
+
+Tone:
+- Factual
+- Serious
+- Non-legal
+- Non-exaggerated
+
+IMPORTANT:
+${files.length} image(s) have been provided as evidence.
+You MUST describe each image as Image 1, Image 2, etc.
+Do NOT say that no images were provided.
+
+STRUCTURE:
+
+1. Purpose of This Document
+2. Background
+3. Account of Events (chronological)
+4. Evidence Provided
+   - Messages
+   - Links
+   - Images
+5. How the Evidence Relates to the Events
+6. Gaps or Uncertainties
+
+TIMELINE:
+${timelineText || 'No timeline entries provided'}
+
+MESSAGES:
+${messages.join('\n') || 'No messages provided'}
+
+LINKS:
+${links.join('\n') || 'No links provided'}
+
+Please generate a comprehensive incident documentation based on the above information.
+`;
+
+    // Prepare contents array for Gemini API
+    const contents = [];
+    
+    // Add text prompt
+    contents.push({
+      role: "user",
+      parts: [{ text: promptText }]
+    });
+    
+    // Add images if available
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const base64Data = file.data.split(',')[1];
+      const mimeType = file.data.split(';')[0].split(':')[1];
+      
+      contents[0].parts.push({
+        inline_data: {
+          mime_type: mimeType,
+          data: base64Data
+        }
+      });
+    }
+
+    // Call Gemini API
+    let aiText = '';
+    
+    try {
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          contents: contents,
+          generationConfig: {
+            temperature: 0.7,
+            maxOutputTokens: 8000,
+          }
+        })
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(`Gemini API error: ${errorData.error?.message || response.statusText}`);
+      }
+
+      const data = await response.json();
+      
+      if (data.candidates && data.candidates[0] && data.candidates[0].content) {
+        aiText = data.candidates[0].content.parts[0].text;
+      } else {
+        throw new Error('Invalid API response format');
+      }
+    } catch (apiError) {
+      console.error('API Error:', apiError);
+      alert('Error calling Gemini API: ' + apiError.message + '\n\nPlease check your API key and try again.');
+      throw apiError;
+    }
+
+    // Generate PDF using jsPDF
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    
+    let yPosition = 20;
+    const pageHeight = doc.internal.pageSize.height;
+    const margin = 20;
+    const maxWidth = 170;
+    
+    // Title
+    doc.setFontSize(18);
+    doc.setFont(undefined, 'bold');
+    doc.text("Incident Documentation", margin, yPosition);
+    yPosition += 15;
+    
+    // AI-generated content with proper pagination
+    doc.setFontSize(11);
+    doc.setFont(undefined, 'normal');
+    
+    const paragraphs = aiText.split('\n');
+    
+    for (let para of paragraphs) {
+      if (!para.trim()) {
+        yPosition += 5;
+        continue;
+      }
+      
+      const lines = doc.splitTextToSize(para, maxWidth);
+      
+      // Check if we need a new page
+      if (yPosition + (lines.length * 7) > pageHeight - margin) {
+        doc.addPage();
+        yPosition = margin;
+      }
+      
+      doc.text(lines, margin, yPosition);
+      yPosition += lines.length * 7;
+    }
+    
+    // Add images on new pages
+    if (files.length > 0) {
+      for (let i = 0; i < files.length; i++) {
+        doc.addPage();
+        doc.setFontSize(14);
+        doc.setFont(undefined, 'bold');
+        doc.text(`Evidence Image ${i + 1}`, margin, 20);
+        
+        try {
+          const imgData = files[i].data;
+          doc.addImage(imgData, 'JPEG', margin, 30, maxWidth, 220, undefined, 'FAST');
+        } catch (imgError) {
+          console.error('Error adding image:', imgError);
+          doc.setFontSize(10);
+          doc.setFont(undefined, 'normal');
+          doc.text(`[Image could not be embedded: ${files[i].name}]`, margin, 40);
+        }
+      }
+    }
+    
+    // Download PDF
+    doc.save('incident_documentation.pdf');
+    
+  } catch (error) {
+    console.error('PDF Generation Error:', error);
+    // Error message already shown in API error catch
+  } finally {
+    btn.disabled = false;
+    loading.style.display = 'none';
+  }
+}
+</script>
+
+</body>
+</html>
